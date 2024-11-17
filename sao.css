@@ -1,127 +1,174 @@
-/* Thiết lập chung */
+/* Base Styles */
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f0f2f5;
-    color: #333;
-  }
-  
-  h1 {
-    color: #007bff;
-    font-weight: 700;
-  }
-  
-  #app {
+  font-family: Arial, sans-serif;
+  background-color: #f0f2f5;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #007bff;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Login Button */
+#login-container {
+  margin-bottom: 2rem;
+}
+
+#login-button {
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #4f8df6, #3a7ce3);
+  border: none;
+  color: #fff;
+  transition: background 0.3s ease;
+}
+
+#login-button:hover {
+  background: linear-gradient(135deg, #3a7ce3, #4f8df6);
+  transform: scale(1.05);
+}
+
+/* Points Display */
+#points-container {
+  background-color: #e9ecef;
+  padding: 1rem;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.star {
+  color: gold;
+  font-size: 1.5rem;
+}
+
+/* Task Form */
+#task-form {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+#task-input, #task-value {
+  width: 45%;
+}
+
+#task-input, #task-value, #task-form button {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+}
+
+#task-form button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  transition: background 0.3s ease;
+}
+
+#task-form button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Task Board */
+#task-board {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.task {
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.task:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+.task h5 {
+  font-size: 1.2rem;
+  margin: 0;
+  color: #495057;
+}
+
+.complete-btn {
+  padding: 0.4rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #28a745;
+  border: none;
+  transition: background 0.3s ease;
+}
+
+.complete-btn:hover {
+  background-color: #218838;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.task {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes shine {
+  0% { color: #ffecb3; }
+  100% { color: gold; }
+}
+
+.star {
+  animation: shine 1.5s infinite alternate;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 600px) {
+  #task-input, #task-value {
     width: 100%;
-    max-width: 800px;
+    margin-bottom: 0.5rem;
   }
   
-  .task-header h5 {
-    font-weight: 600;
-    color: #333;
+  #task-form {
+    flex-direction: column;
+    gap: 0.5rem;
   }
-  
-  /* Bảng điểm */
-  #points-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: #ffffff;
-    border: 1px solid #dee2e6;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-  }
-  
-  #points-container .member {
-    text-align: center;
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #007bff;
-  }
-  
-  #points-container .member span {
-    color: #ffbf00;
-  }
-  
-  /* Form thêm công việc */
-  form#task-form {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  form#task-form input[type="text"],
-  form#task-form input[type="number"] {
-    width: 60%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  form#task-form button {
-    background-color: #007bff;
-    color: #fff;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-weight: bold;
-  }
-  
-  form#task-form button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Bảng công việc */
-  .task {
-    background-color: #ffffff;
-    border: 1px solid #dee2e6;
-    border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 1rem;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  }
-  
-  .task-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .ticks {
-    display: flex;
-    gap: 8px;
-  }
-  
-  .tick {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    cursor: pointer;
-    opacity: 0.6;
-    transition: all 0.3s ease;
-    border: 2px solid #ddd;
-  }
-  
-  .tick.completed {
-    opacity: 1;
-    transform: scale(1.1);
-    border-color: #007bff;
-  }
-  
-  .tick[data-member="member1"] { background-color: #007bff; }
-  .tick[data-member="member2"] { background-color: #28a745; }
-  .tick[data-member="member3"] { background-color: #ffc107; }
-  .tick[data-member="member4"] { background-color: #e83e8c; }
-  
-  .tick:hover {
-    transform: scale(1.15);
-    opacity: 1;
-  }
-  
-  /* Nút hover */
-  button:hover {
-    background-color: #0069d9;
-    transition: 0.3s;
-  }
-  
+}

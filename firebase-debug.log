@@ -1,0 +1,49 @@
+[debug] [2024-11-15T11:35:50.173Z] ----------------------------------------------------------------------
+[debug] [2024-11-15T11:35:50.175Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\truon\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2024-11-15T11:35:50.175Z] CLI Version:   13.25.0
+[debug] [2024-11-15T11:35:50.175Z] Platform:      win32
+[debug] [2024-11-15T11:35:50.175Z] Node Version:  v20.18.0
+[debug] [2024-11-15T11:35:50.175Z] Time:          Fri Nov 15 2024 18:35:50 GMT+0700 (Indochina Time)
+[debug] [2024-11-15T11:35:50.175Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-11-15T11:35:50.180Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-11-15T11:35:50.180Z] > authorizing via signed-in user (truong131204@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  D:\WORKSPACE\Documents\VScode\AppSao
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[info] 
+=== Firestore Setup
+[info] 
+[info] Firestore Security Rules allow you to define how and when to allow
+[info] requests. You can keep these rules in your project directory
+[info] and publish them with firebase deploy.
+[info] 
+[debug] [2024-11-15T12:36:45.198Z] ----------------------------------------------------------------------
+[debug] [2024-11-15T12:36:45.200Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\truon\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2024-11-15T12:36:45.200Z] CLI Version:   13.25.0
+[debug] [2024-11-15T12:36:45.201Z] Platform:      win32
+[debug] [2024-11-15T12:36:45.201Z] Node Version:  v20.18.0
+[debug] [2024-11-15T12:36:45.201Z] Time:          Fri Nov 15 2024 19:36:45 GMT+0700 (Indochina Time)
+[debug] [2024-11-15T12:36:45.201Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-11-15T12:36:50.240Z] Error: Timed out.
+    at Timeout._onTimeout (C:\Users\truon\AppData\Roaming\npm\node_modules\firebase-tools\lib\utils.js:268:49)
+    at listOnTimeout (node:internal/timers:581:17)
+    at process.processTimers (node:internal/timers:519:7)
+[error] 
+[error] Error: An unexpected error has occurred.
