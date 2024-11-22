@@ -1,11 +1,12 @@
+import { initializeApp } from "firebase/app";
 // Firebase Configuration
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyAkc_omaw5z-4ezryZfZzhSJE1F7wYGY7k",
+  authDomain:"sao-46955.firebaseapp.com",
+  projectId: "sao-46955",
+  storageBucket: "sao-46955.firebasestorage.app",
+  messagingSenderId: "348995735858",
+  appId:"1:348995735858:web:f5d4df69f3dc929ec7872b",
 };
 
 // Initialize Firebase
@@ -86,7 +87,7 @@ function loadPoints() {
 
 // Render Task
 function renderTask(task) {
-  const taskElement = document.createElement("div");
+  const taskElement = document.createElement("div");f
   taskElement.classList.add("task", "col-12");
 
   taskElement.innerHTML = `
