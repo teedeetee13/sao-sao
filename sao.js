@@ -1,18 +1,22 @@
+// Import Firebase modules
 import { initializeApp } from "firebase/app";
+import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "firebase/auth";
+import { getFirestore, doc, collection, setDoc, onSnapshot, updateDoc, deleteDoc } from "firebase/firestore";
+
 // Firebase Configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAkc_omaw5z-4ezryZfZzhSJE1F7wYGY7k",
-  authDomain:"sao-46955.firebaseapp.com",
+  authDomain: "sao-46955.firebaseapp.com",
   projectId: "sao-46955",
-  storageBucket: "sao-46955.firebasestorage.app",
+  storageBucket: "sao-46955.appspot.com",
   messagingSenderId: "348995735858",
-  appId:"1:348995735858:web:f5d4df69f3dc929ec7872b",
+  appId: "1:348995735858:web:f5d4df69f3dc929ec7872b",
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.firestore();
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
 // DOM Elements
 const loginButton = document.getElementById("login-button");
@@ -26,8 +30,8 @@ let currentUser = null;
 
 // Login Function
 loginButton.addEventListener("click", () => {
-  const provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithPopup(provider)
+  const provider = new GoogleAuthProvider();
+  signInWithPopup(auth, provider)
     .then((result) => {
       currentUser = result.user;
       initApp();
@@ -38,7 +42,7 @@ loginButton.addEventListener("click", () => {
 });
 
 // Monitor Auth State
-auth.onAuthStateChanged((user) => {
+onAuthStateChanged(auth, (user) => {
   if (user) {
     currentUser = user;
     initApp();
@@ -59,9 +63,9 @@ function initApp() {
 
 // Load Tasks from Firestore
 function loadTasks() {
-  const tasksRef = db.collection("users").doc(currentUser.uid).collection("tasks");
+  const tasksRef = collection(db, "users", currentUser.uid, "tasks");
 
-  tasksRef.onSnapshot((snapshot) => {
+  onSnapshot(tasksRef, (snapshot) => {
     taskBoard.innerHTML = "";
     snapshot.forEach((doc) => {
       const task = doc.data();
@@ -73,21 +77,21 @@ function loadTasks() {
 
 // Load Points from Firestore
 function loadPoints() {
-  const userRef = db.collection("users").doc(currentUser.uid);
+  const userRef = doc(db, "users", currentUser.uid);
 
-  userRef.onSnapshot((doc) => {
-    if (doc.exists) {
-      const userData = doc.data();
+  onSnapshot(userRef, (docSnap) => {
+    if (docSnap.exists()) {
+      const userData = docSnap.data();
       renderPoints(userData.points || 0);
     } else {
-      userRef.set({ points: 0 });
+      setDoc(userRef, { points: 0 });
     }
   });
 }
 
 // Render Task
 function renderTask(task) {
-  const taskElement = document.createElement("div");f
+  const taskElement = document.createElement("div");
   taskElement.classList.add("task", "col-12");
 
   taskElement.innerHTML = `
@@ -106,12 +110,12 @@ function renderTask(task) {
 
 // Complete Task
 function completeTask(task) {
-  const userRef = db.collection("users").doc(currentUser.uid);
+  const userRef = doc(db, "users", currentUser.uid);
 
-  userRef.update({
-    points: firebase.firestore.FieldValue.increment(task.value)
+  updateDoc(userRef, {
+    points: task.value
   });
-  db.collection("users").doc(currentUser.uid).collection("tasks").doc(task.id).delete();
+  deleteDoc(doc(db, "users", currentUser.uid, "tasks", task.id));
 }
 
 // Render Points
@@ -126,7 +130,8 @@ taskForm.addEventListener("submit", (e) => {
   const taskValue = parseInt(document.getElementById("task-value").value);
 
   if (taskName && taskValue > 0) {
-    db.collection("users").doc(currentUser.uid).collection("tasks").add({
+    const tasksRef = collection(db, "users", currentUser.uid, "tasks");
+    setDoc(doc(tasksRef), {
       name: taskName,
       value: taskValue
     });
